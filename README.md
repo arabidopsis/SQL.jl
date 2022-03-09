@@ -1,10 +1,11 @@
 # SQL.jl
 
-Easy Notebook julia SQL
+Easy Notebook julia SQL.
 
-install with:
+Install with:
 
 ```julia
+import Pkg;
 Pkg.add(url="https://github.com/arabidopsis/SQL.jl")
 ```
 
@@ -31,7 +32,7 @@ for a custom command:
 df = sql`select * from table limit 5`
 
 N = 5
-# interpolation *does not* work
+# variable interpolation *does not* work
 df = sql`select * from table limit $(N)`
 
 # but this does!
@@ -58,9 +59,9 @@ SQL.sql_set_default(conn1)
 
 ## TODO
 
-* add postgresql too https://github.com/invenia/LibPQ.jl
+* add postgresql too [LibPQ](https://github.com/invenia/LibPQ.jl)
 
 
 ## See also
 
-* https://github.com/wookay/Octo.jl
+* [Octo](https://github.com/wookay/Octo.jl)
