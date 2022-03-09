@@ -11,11 +11,16 @@ Pkg.add(url="https://github.com/arabidopsis/SQL.jl")
 Use like:
 
 ```julia
-import SQL: @sql, @sql_cmd, sql_connect
+import SQL: @sql, @sql_cmd, sql, sql_connect
 
 sql_connect("mysql://username:$(password)@localhost/database")
 N = 5
 @sql "select * from table limit $(N)"
+
+# as a simple function
+table = "table1"
+s = "select * from " * table
+df = sql(s)
 ```
 
 Currently I can't find a way to do string interpolation
