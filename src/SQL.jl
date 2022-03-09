@@ -35,7 +35,7 @@ function mysql_connect(u::URI)
     end
     db = String(u.path[2:end])
     query = filter(t -> t[1] == "unix_socket", [split(q, "=") for q in split(u.query, "&")])
-    if length(v) >= 1
+    if length(query) >= 1
         unix_socket = String(query[1][2])
     else
         unix_socket = MySQL.API.MYSQL_DEFAULT_SOCKET
