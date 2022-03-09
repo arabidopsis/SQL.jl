@@ -1,10 +1,11 @@
 name = "SQL"
 uuid = "b104871a-889d-4411-bbe7-07c8024ba865"
 authors = ["Ian Castleden <ian.castleden@uwa.edu.au>"]
-version = "0.1.1"
+version = "0.1.2"
 
 [deps]
 DBInterface = "a10d1c49-ce27-4219-8d33-6db1a4562965"
 DataFrames = "a93c6f00-e57d-5684-b7b6-d8193f3e46c0"
 MySQL = "39abe10b-433b-5dbd-92d4-e302a9df00cd"
+SQLite = "0aa819cd-b072-5ff4-a722-6bc24af294d9"
 URIs = "5c2747f8-b7ea-4ff2-ba2e-563bfd36b1d4"
