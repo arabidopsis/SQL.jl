@@ -58,4 +58,9 @@ SQL.sql_set_default(conn1)
 
 ## TODO
 
-* add postgresql too
+* add postgresql too https://github.com/invenia/LibPQ.jl
+
+
+## See also
+
+* https://github.com/wookay/Octo.jl
