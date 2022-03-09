@@ -2,7 +2,6 @@ module SQL
 import MySQL
 import DBInterface
 import DataFrames: DataFrame
-import PyFormattedStrings: @f_str
 import URIs: URI
 
 
