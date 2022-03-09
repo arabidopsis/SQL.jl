@@ -7,11 +7,11 @@ import URIs: URI
 import SQLite
 
 
-export sql_df, set_db, @sql_cmd, @sql_df, @sql_cmd, connect
+export sql, sql_set_default, @sql, @sql_cmd, sql_connect
 
 CC = nothing
 
-function connect(uri::String)
+function sql_connect(uri::String)
     u = URI(uri)
     if startswith(u.scheme, "mysql")
         return mysql_connect(u)
@@ -55,7 +55,7 @@ function sqlite_connect(u::URI)
 end
 
 "Set default database connection to conn or rest to nothing"
-function set_db(conn::Union{DBInterface.Connection,Nothing})::Union{DBInterface.Connection,Nothing}
+function sql_set_default(conn::Union{DBInterface.Connection,Nothing})::Union{DBInterface.Connection,Nothing}
     global CC
     old = CC
     CC = conn
@@ -67,6 +67,14 @@ function sql_df(conn, query::String)::DataFrame
     DataFrame(DBInterface.execute(DBInterface.prepare(conn, query)))
 end
 
+
+function sql(conn, query::String)::DataFrame
+    sql_df(conn, query)
+end
+
+function sql(query::String)::DataFrame
+    sql_df(query)
+end
 
 function sql_df(conn::String, query::String)::DataFrame
     conn = mysql_connect(conn)
@@ -86,14 +94,14 @@ macro sql_cmd(query::String)
     end
 end
 
-macro sql_df(conn, query)
+macro sql(conn, query)
     return quote
         local c = @eval $conn
         local q2 = @eval $query
         sql_df(c, q2)
     end
 end
-macro sql_df(query)
+macro sql(query)
     return quote
         local q = @eval $query
         sql_df(CC, q)
