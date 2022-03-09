@@ -5,7 +5,7 @@ import DataFrames: DataFrame
 import URIs: URI
 
 
-export mysql_connect, to_df, @sql_cmd, @sql_df
+export mysql_connect, sql_df, set_db, @sql_cmd, @sql_df, @sql_cmd
 
 CC = nothing
 
@@ -23,11 +23,26 @@ function mysql_connect(uri::String)
     CC
 end
 
+"Set default database connection to conn"
+function set_db(conn)
+    global CC
+    CC = conn
+end
+"Execute an SQL query on database conn"
 function sql_df(conn, query::String)::DataFrame
+    @assert conn != nothing "no database connection!"
     DataFrame(DBInterface.execute(DBInterface.prepare(conn, query)))
 end
 
 
+function sql_df(conn::String, query::String)::DataFrame
+    conn = mysql_connect(conn)
+    sql_df(conn, query)
+end
+
+function sql_df(query::String)::DataFrame
+    sql_df(CC, query)
+end
 
 macro sql_cmd(query)
 
